@@ -2,10 +2,10 @@
 
 Ten tydzień był znacząco mniej pracowity niż poprzedni, gdyż starałem się rozwiązać problemy z poprzedniego. A więc:
 
-„rozwiązanie hazardu w Multisimie"  
+<u>„rozwiązanie hazardu w Multisimie"</u>
 Niestety problemu na razie nie udało się rozwiązać, głównie ze względu na krótką konsultację. Starałem się jeszcze coś pokombinować (wyjąć układy z podukładów, dołożyć przerzutniki na wyjściach), ale bezskutecznie. Problem odkładam na kolejne tygodnie, być może uda się trochę dłużej porozmawiać o problemie na zajęciach.
 
-„dokupienie odpowiednich układów bramek do dekodera", „kupienie gniazda DIP28 do programatora" oraz „dokupienie większych kondensatorów"
+<u>„dokupienie odpowiednich układów bramek do dekodera", „kupienie gniazda DIP28 do programatora" oraz „dokupienie większych kondensatorów"</u>
 
 Udało mi się znaleźć stacjonarny sklep z elektroniką w Krakowie i postanowiłem się do niego wybrać. Dorwałem w nim bramki NOT potrzebne do dekodera, gniazdo DIP28 oraz kondensatory 1μF i 10μF. Dzięki temu jestem w stanie zrobić trochę więcej i rozwiązać część problemów z zeszłego tygodnia.
 
@@ -13,7 +13,7 @@ Dzięki kondensatorom jestem w stanie doregulować główny zegar tak, aby miał
 
 Mając w ręku gniazdo DIP28 jestem już w stanie wykonać docelowy programator EEPROM, a więc…
 
-„…a następnie jego zlutowanie (programatora) na PCB"
+<u>„…a następnie jego zlutowanie (programatora) na PCB"</u>
 
 Ponieważ zależało mi na komforcie wkładania i wyjmowania pamięci do programatora oraz jak najbardziej stabilnych połączeniach (i przy okazji chciałem poćwiczyć lutowanie) zdecydowałem się na zrobienie długich ścieżek. Dzięki temu nie trzeba się przeciskać między przewodami aby włożyć/wyjąć pamięć, oraz same przewody połączeniowe do Arduino są obok siebie i nie działa na nie aż taka duża siła (dzięki temu stabilnie siedzą w gniazdach). Dołożyłem również parę diod LED - jedna do sprawdzenia zasilania i trzy do pinów sterujących WE, OE i CE - aby łatwiej sprawdzić działanie programatora. Całość zajęła mi dwie noce, a ilość zużytej cyny w odsysaczu oraz „brzydkich" słów gdy n-ty raz musiałem poprawiać ścieżkę bo zwarła się z sąsiadującą - bezcenna. Z drugiej strony, widać, że ze ścieżki na ścieżkę szło mi coraz lepiej i luty były ładniejsze. Mimo wszystko, cieszę się iż wreszcie miałem możliwość pobawienia się z lutownicą w tak ambitny sposób - jest to doświadczenie którego nie da się nigdzie kupić i na pewno przyda się w przyszłości. Sam programator działa i problem z błędnymi odczytami i zapisami zniknął.
 
@@ -25,6 +25,8 @@ Ponieważ zależało mi na komforcie wkładania i wyjmowania pamięci do program
   <img src="../../photos/week2/week2_EEPROM2.jpg" width="60%" alt="Programator 2">
 </div>
 
+
+<u>„skonsultowanie pomysłu z długością nut, zamodelowanie w Multisimie, kupienie licznika i odpowiednich układów.”</u>
 
 Przedstawiłem mój pomysł i uzyskałem aprobatę prowadzącego, biorę się więc do działania. Najpierw zamodelowałem mój układ w Multisimie, aby upewnić się że robi to co powinien, oraz co jeszcze należy dokupić. Do pełni szczęścia potrzebna była mi jednak pamięć z której mógłbym normalnie korzystać tak jak ze zwykłego EEPROMa. W programie znalazłem 3 rozwiązania:
 
