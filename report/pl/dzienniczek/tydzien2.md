@@ -3,6 +3,7 @@
 Ten tydzień był znacząco mniej pracowity niż poprzedni, gdyż starałem się rozwiązać problemy z poprzedniego. A więc:
 
 <u>„rozwiązanie hazardu w Multisimie"</u>
+
 Niestety problemu na razie nie udało się rozwiązać, głównie ze względu na krótką konsultację. Starałem się jeszcze coś pokombinować (wyjąć układy z podukładów, dołożyć przerzutniki na wyjściach), ale bezskutecznie. Problem odkładam na kolejne tygodnie, być może uda się trochę dłużej porozmawiać o problemie na zajęciach.
 
 <u>„dokupienie odpowiednich układów bramek do dekodera", „kupienie gniazda DIP28 do programatora" oraz „dokupienie większych kondensatorów"</u>
