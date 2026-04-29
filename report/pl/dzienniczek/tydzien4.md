@@ -25,8 +25,8 @@ Na swoim miejscu został tylko zegar oraz EEPROM, sterownik udało się zdecydow
 Dobra, koniec gadania o przewodach - po przearanżowaniu układu udało się zaoszczędzić około pół płytki, więc płynnie przechodzę do drugiego (a właściwie pierwszego) problemu. Na ten moment gdybym podłączył EEPROM bezpośrednio do dekodera, to dekodowałby on nie tylko nuty (na nieparzystych adresach), ale również i ich długości (na parzystych adresach). Oczywiście nie jest to zamierzone, długość nuty ma znaczenie tylko dla licznika malejącego! W związku z tym chcę, aby na dekoder szedł tylko i wyłącznie sygnał nuty, czyli wtedy, gdy na najmłodszym bicie licznika pamięci znajduje się wartość 1. W takim razie, wystarczy „zANDować" sygnał LSB z każdą z pięciu linii wyjściowych EEPROM, ale i również z każdą z znegowanych pięciu linii wyjściowych EEPROM (bo używam też bramek NOT w dekoderze). Czyli potrzebuję 5 bramek NOT i 10 bramek AND
 
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
-  <img src="../../photos/week4/week4_and.png" width="30%" alt="Układ AND">
-  <img src="../../photos/week4/week4_not.png" width="30%" alt="Układ NOT">
+  <img src="../../photos/week4/week4_and.png" width="40%" alt="Układ AND">
+  <img src="../../photos/week4/week4_not.png" width="20%" alt="Układ NOT">
 </div>
 
 Mam układy HEF4049BP (6 bramek NOT) i SN74HC08 (4 dwuwejściowe bramki AND), a więc biorę jeden układ HEF… i trzy układy SN… i wstawiam dokładnie w to zaoszczędzone wcześniej miejsce na płytce. Sygnał z EEPROM podłączam do bramek NOT, a następnie podłączam zarówno sygnał zanegowany jak i prosto z pamięci do bramek AND wraz z sygnałem z LSB.
