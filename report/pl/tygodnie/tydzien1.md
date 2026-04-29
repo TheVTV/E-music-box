@@ -90,7 +90,7 @@ Po bitwie z dekoderem w Multisimie chciałem trochę odreagować i zacząć dzia
 Następnie przystąpiłem do przeczytania dokumentacji układu 4 bitowego licznika SN74HC161, aby sprawdzić jak taki układ spiąć na płytce:
 
 <div align="center">
-  <img src="../../photos/week1/week1_counter.png" width="60%" alt="Schemat licznika SN74HC161">
+  <img src="../../photos/week1/week1_counter.png" width="20%" alt="Schemat licznika SN74HC161">
 </div>
 
 Jest to licznik liczący do góry z możliwością załadowania liczby na początku. Służą do tego piny A, B, C, D oraz zanegowany LOAD (Czyli jeśli na pinie 9 zostanie podane 0, licznik nie będzie liczył, lecz zapisze wartość z wejść A, B, C, D). Ponieważ ich nie używam, piny 3-6 podpinam do masy, a pin 9 do VCC. Analogicznie postępuję z pinem 1 (zanegowany CLR), który po dostaniu stanu 0 zresetuje licznik - podpinam do VCC. Pin 2 to wejście zegara, więc podpinam go do wcześniej złożonego układu. Piny 7, 10 i 15 (ENP, ENT i RCO) służą do łączenia liczników kaskadowo oraz do załączania liczenia. Na razie bawię się jednym licznikiem więc piny 7 i 10 podłączam do VCC, a 15 do masy. Zostały piny zasilające oraz piny 11-14, które są wyjściem licznika w takiej postaci, że Qa to najmłodszy bit, a Qd to najstarszy bit. Podłączam do tych wyjść diody led przez rezystory i obserwuje działanie licznika.
@@ -125,7 +125,9 @@ $$
 
 A zarazem i częstotliwość:
 
-$f = \frac{1}{T} \approx \frac{1.44}{(R_1 + 2R_2)C}$
+$$
+f = \frac{1}{T} \approx \frac{1.44}{(R_1 + 2R_2)C}
+$$
 
 Czyli wraz ze zwiększeniem wartości rezystorów i kondensatora częstotliwość się zmniejsza. Zastanówmy się jeszcze nad wypełnieniem (Duty Cycle), gdyż też odgrywa ono istotną rolę. Jest to stosunek czasu trwania sygnału wysokiego do okresu:
 
@@ -150,7 +152,7 @@ Zajmijmy się więc pamięcią EEPROM. Ten z którego korzystam to CAT28C64A, kt
 Biorę więc kolejną płytkę prototypową i składam programator!
 
 <div align="center">
-  <img src="../../photos/week1/week1_EEPROM.png" width="60%" alt="Programator EEPROM">
+  <img src="../../photos/week1/week1_EEPROM.png" width="20%" alt="Programator EEPROM">
 </div>
 
 Napisałem prosty program który odczytuje wartość pamięci na danym adresie, zapisuje wartość na danym adresie pamięci oraz wypisuje zawartość całej pamięci. Realizuje się to poprzez komendy READ, WRITE i DUMP (z odpowiednimi argumentami) na porcie szeregowym płytki. Docelowo chciałbym również napisać program w Pythonie, który rozszerzy te funkcjonalności łącząc się z płytką poprzez właśnie port szeregowy, i będzie miał możliwość m.in. automatycznego zapisania zawartości pliku na komputerze do pamięci EEPROM.
@@ -158,6 +160,12 @@ Napisałem prosty program który odczytuje wartość pamięci na danym adresie, 
 Zauważyłem natomiast minus mojego programatora. Mianowicie przy jakiejkolwiek operacji na pamięci muszę upewnić się, iż wszystkie przewody są dobrze podopinane zarówno do Arduino jak i do breadboarda. Ponadto, lekki ruch układu może spowodować poluzowanie się przewodu a co za tym idzie - wartości zostają źle zapisane. Jest to oczywiście spowodowane samą budową - przewody nie są wpięte na stałe i mogą się poruszyć, co jest nieakceptowalne w dalszej perspektywie. Dlatego właśnie muszę zlutować ten układ na uniwersalnej płytce PCB - myślę, że zapewni to o wiele lepszą dokładność. Na ten moment niestety nie mam gniazda DIP28 do swobodnego wyjmowania i wkładania pamięci do układu (bezsensowne byłoby przylutowanie EEPROMa do płytki), toteż odkładam to na dalszy plan.
 
 Po wgraniu przykładowych wartości do pamięci wracam do płytki z licznikami i próbuję to ładnie ze sobą spiąć.
+
+<div align="center">
+  <img src="../../photos/week1/week1_EEPROM.png" width="20%" alt="Programator EEPROM">
+</div>
+
+Piny A0-A12 to linie wejścia. Ponieważ mam licznik 8 bitowy, do linii A0-A7 podłączam wyjścia licznika, a linie A8-A12 – do masy (będą wtedy traktowane jako 0). Piny I/O_0 - I/O_7 to linie wyjścia, które podłączam wprost do ledów, które wcześniej były podpięte do liczników. Piny NC nadal zostają niepodłączone, VCC i VSS podłączam odpowiednio do VCC i masy, a jeśli chodzi o piny sterujące – CE i OE podłączam do masy (traktowane jako 0), a WE – do VCC (traktowane jako 1). Dzięki temu pamięć będzie ustawiona zawsze w trybie do odczytu. 
 
 Uruchamiam układ i sprawdzam działanie:
 
