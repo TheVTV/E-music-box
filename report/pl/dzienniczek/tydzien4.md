@@ -10,11 +10,11 @@ Najpierw zajmę się tym drugim problemem, gdyż dotychczasowy układ da się le
 
 <div align="center" style="display: flex; justify-content: center; gap: 20px;">
   <div style="text-align: center;">
-    <img src="../../photos/week4/week4_bef.jpg" width="30%" alt="Przed">
+    <img src="../../photos/week4/week4_bef.jpg" width="40%" alt="Przed">
     <p><strong>Przed</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="../../photos/week2/week4_aft.jpg" width="30%" alt="Po">
+    <img src="../../photos/week4/week4_aft.jpg" width="40%" alt="Po">
     <p><strong>Po</strong></p>
   </div>
 </div>
