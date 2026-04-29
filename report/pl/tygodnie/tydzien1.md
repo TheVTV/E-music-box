@@ -202,13 +202,13 @@ Docelowo dany dźwięk ma grać tylko wtedy, kiedy z dekodera wyjdzie wartość 
 Postanowiłem zrobić mały eksperyment - podpinam bazę do jednego z wyjść pamięci EEPROM, na przykład najstarszy bit. Dzięki temu mogę zasymulować co się stanie, jak dany układ rezystorów zostanie załączony przez dekoder. Uruchamiam więc cały układ z licznikami (uprzednio podłączając zegar w trybie monostabilnym aby "przeklikiwać" przez kolejne adresy) i obserwuję (a raczej wysłuchuję) efekty.
 
 <div align="center">
-  <img src="../../photos/week1/week1_generator3.jpg" width="60%" alt="Generator dźwięku - eksperyment">
+  <img src="../../photos/week1/week1_generatorTest1.jpg" width="60%" alt="Generator dźwięku - eksperyment 1">
 </div>
 
 Wszystko działa jak powinno! Gdy dioda led świeci na najstarszym bicie, głośnik wydaje dźwięk. Ponieważ mam jeszcze chwilę, dołożę drugi potencjometr i podłączę go analogicznie jak poprzedni, jednak podłączę go do drugiego w kolejności najstarszego bitu. Przy okazji dostroję oba dźwięki tak, aby na jednym potencjometrze było C, a na drugim D.
 
 <div align="center">
-  <img src="../../photos/week1/week1_generator4.jpg" width="60%" alt="Generator dźwięku - wersja finalna">
+  <img src="../../photos/week1/week1_generatorTest2.jpg" width="60%" alt="Generator dźwięku - eksperyment 2">
 </div>
 
 Również działa jak powinno! Zauważyłem jednak jedną rzecz - gdy dwie diody (które odpowiadają podaniu sygnału na bazy tranzystorów) świecą się jednocześnie, dźwięk wydobywany z głośnika to nie jest jednocześnie połączony dźwięk C i D (interwał), lecz zupełnie inny pojedynczy dźwięk. Jest to logiczne, gdyż po załączeniu dwóch zestawów rezystorów, całkowity opór jest inny - a więc i dźwięk jest inny. Gdybym chciał tworzyć interwały bądź akordy, musiałbym najpewniej złożyć więcej generatorów. Oczywiście nie brakuje mi układów NE555, jednak skomplikuje to dodatkowo układ, a zarazem zapis nut w pamięci EEPROM jak i odczyt tych wartości. Na ten moment jeden dźwięk jednocześnie w zupełności wystarczy.
