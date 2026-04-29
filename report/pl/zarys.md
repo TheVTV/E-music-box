@@ -1,18 +1,21 @@
-**Odtwarzacz melodii z pamięci EEPROM  
-(Elektroniczna pozytywka)**
+# Odtwarzacz melodii z pamięci EEPROM (Elektroniczna pozytywka)
 
-Wykonanie: Bartosz Wójcik
+**Wykonanie:** Bartosz Wójcik
 
-Ogólny zamysł:  
-Chciałbym zbudować na płytkach prototypowych odtwarzacz melodii zapisanych w formacie „nutowym" na pamięci EEPROM. Do tego celu chciałbym użyć jak najbardziej podstawowych układów elektronicznych, takich jak np. bramki logiczne, liczniki, przerzutniki.
+## Ogólny zamysł
 
-Budowa:  
-(Podkreśleniem oznaczone są funkcjonalności/zmiany powstałe podczas wykonywania projektu)  
-<br/>Sam system można by podzielić na dwie części:  
-**1.** Czytnik nut z pamięci  
-**2.** Generator dźwięku
+Chciałbym zbudować na płytkach prototypowych odtwarzacz melodii zapisanych w formacie "nutowym" na pamięci EEPROM. Do tego celu chciałbym użyć jak najbardziej podstawowych układów elektronicznych, takich jak np. bramki logiczne, liczniki, przerzutniki.
 
-Ad.1 (Czytnik nut z pamięci)  
+## Budowa
+
+*(Podkreśleniem oznaczone są funkcjonalności/zmiany powstałe podczas wykonywania projektu)*
+
+Sam system można by podzielić na dwie części:
+### 1. Czytnik nut z pamięci
+
+### 2. Generator dźwięku
+
+## Czytnik nut z pamięci (Ad.1)  
 Zegar -> układ liczników -> pamięć EEPROM -> dekoder nut -> tranzystor NPN
 
 W układzie pamięci znajdowałaby się melodia w przykładowym formacie:
@@ -31,10 +34,13 @@ W układzie pamięci znajdowałaby się melodia w przykładowym formacie:
 
 11011 - nuta B5  
 11111 - bit STOP  
-01111 - bit PAUZA (przerwa pomiędzy nutami)  
-(czyli kolejne adresy to kolejne nuty, dla każdego adresu najstarszy bit symbolizuje numer oktawy, a pozostałe 4 - nutę)  
-<br/>Sygnał traktuję jako: O N4 N3 N2 N1 (gdzie O - oktawa, N4-1 - zakodowana nuta)  
-<br/>Sama pamięć działałaby w trybie równoległym - 8 pinów wejściowych, 5 pinów wyjściowych, toteż wyjście z liczników podłączone do wejścia EEPROM generowałoby sygnał który później będziemy interpretować jako nuty (częstotliwość)
+01111 - bit PAUZA (przerwa pomiędzy nutami)
+
+(czyli kolejne adresy to kolejne nuty, dla każdego adresu najstarszy bit symbolizuje numer oktawy, a pozostałe 4 - nutę)
+
+Sygnał traktuję jako: O N4 N3 N2 N1 (gdzie O - oktawa, N4-1 - zakodowana nuta)
+
+Sama pamięć działałaby w trybie równoległym - 8 pinów wejściowych, 5 pinów wyjściowych, toteż wyjście z liczników podłączone do wejścia EEPROM generowałoby sygnał który później będziemy interpretować jako nuty (częstotliwość)
 
 Sam „dekoder" można podzielić na dwie części: dekoder nut i dekoder oktawy:
 
@@ -44,13 +50,15 @@ Dekoder oktawy miałby 13 wejść i 26 wyjść (2 \* 12 nut - dwie oktawy + bit 
 
 Chciałbym cały ten dekoder zbudować na bramkach.
 
-Ad.2 (Generator dźwięku)
+## Generator dźwięku (Ad.2)
 
-Tranzystor NPN -> rezystor -> potencjometr -> zegar -> tranzystor NPN -> głośnik/buzzer  
-<br/>Częstotliwość zegara (wybrałem układ NE555) zależy od R1, R2 i C, w tym przypadku R1 i C będą stałe a to od R2 będzie zależna częstotliwość zegara. Dla każdego wyjścia nutowego z dekodera będzie osobny układ rezystorów pełniący rolę R2, dzięki temu dla każdego sygnału uzyskamy inną częstotliwość. Aby uzyskać czysty dźwięk dla danej nuty potrzebna jest jej dokładna częstotliwość, a aby ją uzyskać potrzebujemy rezystorów o dokładnej „specyficznej wartości", a więc aby ułatwić pracę dla każdej wiązki dodam potencjometr 10k + dobrany rezystor, aby móc „stroić" dźwięk.  
-<br/>Zegar generuje sygnał prostokątny, dzięki któremu poprzez tranzystor wprawiamy w ruch membranę głośnika i generujemy dźwięk. Być może uda się stworzyć inny sygnał, np. sinusoidę.
+Tranzystor NPN -> rezystor -> potencjometr -> zegar -> tranzystor NPN -> głośnik/buzzer
 
-Przykładowe przejście cyklu zegara w celu wygenerowania dźwięku D4:
+Częstotliwość zegara (wybrałem układ NE555) zależy od R1, R2 i C, w tym przypadku R1 i C będą stałe a to od R2 będzie zależna częstotliwość zegara. Dla każdego wyjścia nutowego z dekodera będzie osobny układ rezystorów pełniący rolę R2, dzięki temu dla każdego sygnału uzyskamy inną częstotliwość. Aby uzyskać czysty dźwięk dla danej nuty potrzebna jest jej dokładna częstotliwość, a aby ją uzyskać potrzebujemy rezystorów o dokładnej „specyficznej wartości", a więc aby ułatwić pracę dla każdej wiązki dodam potencjometr 10k + dobrany rezystor, aby móc „stroić" dźwięk.
+
+Zegar generuje sygnał prostokątny, dzięki któremu poprzez tranzystor wprawiamy w ruch membranę głośnika i generujemy dźwięk. Być może uda się stworzyć inny sygnał, np. sinusoidę.
+
+### Przykładowe przejście cyklu zegara w celu wygenerowania dźwięku D4
 
 - Zegar (generuje sygnał prostokątny o zadanej częstotliwości)
 - Licznik (przełącza na kolejną wartość, załóżmy że teraz ma 00000)
@@ -61,7 +69,7 @@ Przykładowe przejście cyklu zegara w celu wygenerowania dźwięku D4:
 - Zegar generuje zadaną częstotliwość i wypuszcza sygnał na tranzystor
 - Tranzystor załącza i odłącza zasilanie głośnika generującego dźwięk
 
-Dodatki
+## Dodatki
 
 Do pełni szczęścia i „przyjemniejszej" pracy warto byłoby dodatkowo zrobić:
 
