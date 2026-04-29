@@ -96,15 +96,34 @@ $$
 t_{high} = 0.693(R_1 + R_2)C
 $$
 
+$$
+t_{low} = 0.693(R_2)C
+$$
+
 Gdzie R1, R2 - rezystory, C - kondensator. Wartość 0.693 wynika z logarytmicznego charakteru ładowania i rozładowania kondensatora w obwodzie RC. Mając te oba czasy jesteśmy w stanie wyliczyć okres:
 
+$$
+T = t_{high} + t_{low} = 0.693(R_1 + 2R_2)C
+$$
+
 A zarazem i częstotliwość:
+$$
+f = \frac{1}{T} \approx \frac{1.44}{(R_1 + 2R_2)C}
+$$
 
 Czyli wraz ze zwiększeniem wartości rezystorów i kondensatora częstotliwość się zmniejsza. Zastanówmy się jeszcze nad wypełnieniem (Duty Cycle), gdyż też odgrywa ono istotną rolę. Jest to stosunek czasu trwania sygnału wysokiego do okresu:
+
+$$
+D = \frac{t_{high}}{T} = \frac{R_1 + R_2}{R_1 + 2R_2}
+$$
 
 Czyli wypełnienie zależy tylko od R1 i R2. Zakładam, że do zasilenia całego układu będę używał napięcia ~5V, także myślę, iż zestaw rezystorów o wartościach R1=1k, R2=10k będzie odpowiedni (zarówno do parametrów zasilania jak i wypełnienia, które wyniesie około 52%).
 
 Obliczmy więc pojemność kondensatora potrzebnego do wygenerowania sygnału o częstotliwości np. 1Hz
+
+$$
+1\text{ Hz} = \frac{1.44}{(1000\Omega + 2 \cdot 10000\Omega)C} \Rightarrow C \approx 68\,\mu\text{F}
+$$
 
 Największy kondensator jaki mam aktualnie przy sobie to 100nF, łączenie ich nie ma żadnego sensu. Na razie wsadzę co mam aby sprawdzić czy układ działa, a docelowo zamienię na inny kondensator.  
 <br/>Układ działa, co prawda ledy migają bardzo szybko, ale skorzystałem (chyba pierwszy raz) z funkcji nagrywania w zwolnionym tempie w moim telefonie aby sprawdzić czy aby na pewno wszystko liczy się jak powinno. Wstępnie jestem w stanie ustalić - działa!
