@@ -22,10 +22,15 @@ Sumarycznie 21 bramek AND i 4 bramki NOT.
 
 Aby nie zapomnieć pomysłu i aby móc to w prosty sposób przedstawić prowadzącemu naszkicowałem wstępny układ dekodera nut:
 
-![](../../photos/week1/week1_sketch1.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_sketch1.jpg" width="60%" alt="Sketch dekodera nut">
+</div>
 
-A tak układ prezentuje się w Multisimie:  
-![](../../photos/week1/week1_multi1.png)
+A tak układ prezentuje się w Multisimie:
+
+<div align="center">
+  <img src="../../photos/week1/week1_multi1.png" width="60%" alt="Multisim - dekoder nut">
+</div>
 
 Jeśli chodzi o dekoder oktawy, to działa on bardzo prosto. Dla każdej nuty z poprzedniego dekodera:
 
@@ -35,21 +40,32 @@ Jeśli chodzi o dekoder oktawy, to działa on bardzo prosto. Dla każdej nuty z 
 Wykonanie jest banalne - dwie bramki AND, do każdej podpinam sygnał dla danej nuty oraz do jednej sygnał oktawy, a do drugiej - zanegowany sygnał oktawy. Dzięki temu jeśli sygnał będzie wychodził z tej pierwszej bramki to będzie to dźwięk z oktawy 5, a jeśli sygnał będzie wychodził drugiej bramki - będzie to dźwięk z oktawy 4.
 
 Naszkicowałem również ten pomysł aby nie uciekł mi z głowy.
-![](../../photos/week1/week1_sketch2.jpg)
+
+<div align="center">
+  <img src="../../photos/week1/week1_sketch2.jpg" width="60%" alt="Sketch dekodera oktawy">
+</div>
 
 I tak należy powtórzyć 13 razy - dla każdej z 12 nut w oktawie i dodatkowo aby rozdzielić sygnał STOP i PAUZA.
 
 A tak układ prezentuje się w Multisimie (tutaj bez STOP i PAUZA):
 
-![](../../photos/week1/week1_multi2.png)
+<div align="center">
+  <img src="../../photos/week1/week1_multi2.png" width="60%" alt="Multisim - dekoder oktawy">
+</div>
+
 W tym przypadku wychodzi mi 26 bramek AND i 1 bramka NOT.
 
 Korzystając z tego, iż mam dostęp do Multisima podłączę oba te dekodery i sprawdzę działanie rozwiązania:
-![](../../photos/week1/week1_multi3.png)
+
+<div align="center">
+  <img src="../../photos/week1/week1_multi3.png" width="60%" alt="Multisim - dekodery połączone">
+</div>
 
 Korzystam z generatora słów, w którym znajduje się sekwencja idąca po kolei po nutach C4, Cis4 … Ais5, B5, STOP. Uruchamiam więc symulację:
 
-![](../../photos/week1/week1_multi4.png)
+<div align="center">
+  <img src="../../photos/week1/week1_multi4.png" width="60%" alt="Multisim - symulacja">
+</div>
 
 No i działa! Dźwięki idą po kolei, co widać na próbnikach. Zauważyłem jeden problem - gdy następuje zmiana dźwięku z B4 na C5, to pomiędzy zgaśnięciem próbnika B4 i zapaleniem próbnika C5 na ułamek sekundy zapala się również próbnik B5. Analogicznie w drugą stronę - przy zmianie z B5 na C4 na ułamek sekundy mignie próbnik B4. Bardzo mnie to zaciekawiło, gdyż to jedyne miejsca gdzie się tak dzieje. Zauważyłem, że to przy zmianie oktawy - dodam więc jeszcze parę nut do generatora słów tak, aby nuty naprzemiennie znajdowały się w innych oktawach. Po przetestowaniu jestem pewien, że moje podejrzenia były słuszne - próbniki wariują przy zmianie oktawy. Nie jestem pewien czym to jest spowodowane, same układy wydają się być poprawne - są na tyle proste, że aż można powiedzieć - nie do zepsucia. A jednak coś tutaj nie gra, muszę się zastanowić co może tu nie grać…
 
@@ -73,7 +89,9 @@ Po bitwie z dekoderem w Multisimie chciałem trochę odreagować i zacząć dzia
 
 Następnie przystąpiłem do przeczytania dokumentacji układu 4 bitowego licznika SN74HC161, aby sprawdzić jak taki układ spiąć na płytce:
 
-![](../../photos/week1/week1_counter.png)
+<div align="center">
+  <img src="../../photos/week1/week1_counter.png" width="60%" alt="Schemat licznika SN74HC161">
+</div>
 
 Jest to licznik liczący do góry z możliwością załadowania liczby na początku. Służą do tego piny A, B, C, D oraz zanegowany LOAD (Czyli jeśli na pinie 9 zostanie podane 0, licznik nie będzie liczył, lecz zapisze wartość z wejść A, B, C, D). Ponieważ ich nie używam, piny 3-6 podpinam do masy, a pin 9 do VCC. Analogicznie postępuję z pinem 1 (zanegowany CLR), który po dostaniu stanu 0 zresetuje licznik - podpinam do VCC. Pin 2 to wejście zegara, więc podpinam go do wcześniej złożonego układu. Piny 7, 10 i 15 (ENP, ENT i RCO) służą do łączenia liczników kaskadowo oraz do załączania liczenia. Na razie bawię się jednym licznikiem więc piny 7 i 10 podłączam do VCC, a 15 do masy. Zostały piny zasilające oraz piny 11-14, które są wyjściem licznika w takiej postaci, że Qa to najmłodszy bit, a Qd to najstarszy bit. Podłączam do tych wyjść diody led przez rezystory i obserwuje działanie licznika.
 
@@ -81,8 +99,13 @@ Działa wspaniale, diody ładnie sobie migają, licznik liczy, ale po co liczyć
 
 Korzystając z tego, iż do docelowego projektu potrzebne będzie więcej liczb, wyposażyłem się nie w jeden, a dwa takie liczniki. Podłączam więc drugi licznik w praktycznie taki sam sposób, jednak aby realizowały one liczenie do 255 (a nie każdy do 15) trzeba je ze sobą połączyć. Do tego służą wcześniej wspomniane piny ENT i RCO. Kiedy licznik osiągnie wartość 15 (czyli 1111, czyli stan wysoki na wszystkich czterech pinach wyjściowych) wyjście RCO (Ripple Carry Output) zmienia swój stan z niskiego na wysoki. Aby licznik mógł liczyć, piny ENP (Enable Parallel) oraz ENT (Enable T) muszą mieć stan wysoki, oraz licznik musi dostać narastający sygnał zegara. Korzystając z tych własności, podłączając wyjście RCO licznika A do wejścia ENT licznika B „utworzymy" licznik 8 bitowy. Tak też zrobiłem, odłączając pin 15 licznika A od masy i podłączając go do pinu 10 licznika B.
 
-![](../../photos/week1/week1_countersTest1.jpg)
-![](../../photos/week1/week1_countersTest2.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_countersTest1.jpg" width="60%" alt="Test liczników - część 1">
+</div>
+
+<div align="center">
+  <img src="../../photos/week1/week1_countersTest2.jpg" width="60%" alt="Test liczników - część 2">
+</div>
 
 Na ten moment nasz układ jest w stanie liczyć od 0 do 255, wystarczająco na początek. Monotoniczne jednak jest wciskanie przycisku do generowania sygnału zegarowego, toteż włożyłem do breadboarda kolejny zegar NE555. Tym razem jednak ustawiłem go w tryb astabilny, czyli aby generował sygnał sam a nie ręcznie. Do tego potrzebne są dwa rezystory i kondensator. Nie chcę wchodzić w dokładny opis budowy i działania układu NE555, ale należy wiedzieć, iż generuje sygnał prostokątny, a przełączenie wyjścia (z 0 na 1 i na odwrót) zależne jest od napięcia na kondensatorze - gdy osiąga 2/3 VCC przełącza na stan niski, a gdy osiąga 1/3 VCC przełącza na stan wysoki. Sam kondensator ładowany jest przez R1 + R2, a rozładowywany tylko przez R2, dlatego czasy ładowania i rozładowania są różne. Czas każdego stanu możemy określić wzorami:
 
@@ -126,7 +149,9 @@ Zajmijmy się więc pamięcią EEPROM. Ten z którego korzystam to CAT28C64A, kt
 
 Biorę więc kolejną płytkę prototypową i składam programator!
 
-![](../../photos/week1/week1_EEPROM.png)
+<div align="center">
+  <img src="../../photos/week1/week1_EEPROM.png" width="60%" alt="Programator EEPROM">
+</div>
 
 Napisałem prosty program który odczytuje wartość pamięci na danym adresie, zapisuje wartość na danym adresie pamięci oraz wypisuje zawartość całej pamięci. Realizuje się to poprzez komendy READ, WRITE i DUMP (z odpowiednimi argumentami) na porcie szeregowym płytki. Docelowo chciałbym również napisać program w Pythonie, który rozszerzy te funkcjonalności łącząc się z płytką poprzez właśnie port szeregowy, i będzie miał możliwość m.in. automatycznego zapisania zawartości pliku na komputerze do pamięci EEPROM.
 
@@ -136,14 +161,21 @@ Po wgraniu przykładowych wartości do pamięci wracam do płytki z licznikami i
 
 Uruchamiam układ i sprawdzam działanie:
 
-![](../../photos/week1/week1_EEPROMTest1.jpg)
-![](../../photos/week1/week1_EEPROMTest2.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_EEPROMTest1.jpg" width="60%" alt="Test EEPROM - część 1">
+</div>
+
+<div align="center">
+  <img src="../../photos/week1/week1_EEPROMTest2.jpg" width="60%" alt="Test EEPROM - część 2">
+</div>
 
 Jak widać układ spełnia na ten moment swoje zadanie. Licznik przy każdym cyklu zegara odnosi się do kolejnej komórki pamięci, której wartość jest wyświetlana na diodach led. Przy umyślnym ułożeniu wartości w pamięci można zrobić ładny pokaz światełek. Mi jednak (nie)stety to nie wystarczy, więc przeskakuję część związaną z dekoderem nut i zajmuję się końcową częścią układu, czyli generatorem dźwięku.
 
 Od dawna w mojej szafie walały się stare słuchawki nauszne z połamanym przewodem (w sumie to one zainspirowały mnie do stworzenia tego projektu), przy użyciu małej ilości „przemocy" na nich udało mi się dostać do ich głośnika. Po zdjęciu izolacji z przewodów i zaciśnięciu na nich męskich pinów już można było go wpiąć do płytki prototypowej. Wziąłem więc kolejną już płytkę w dłoń i złożyłem na niej tożsamy zegar NE555 w trybie astabilnym, a następnie do wyjścia sygnału wpiąłem głośnik. Po wpięciu zasilania mamy pierwszy sukces - głośnik żyje i wydaje charakterystyczny dźwięk fali prostokątnej.
 
-![](../../photos/week1/week1_generator1.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_generator1.jpg" width="60%" alt="Generator dźwięku - wersja 1">
+</div>
 
 Dwie uwagi: głośnik trzeszczy + gra za głośno. Dodałem więc potencjometr precyzyjny (tylko taki mam pod ręką) o wartości 10k i wpiąłem go tuż przed głośnikiem - dzięki temu mogę regulować głośność. Trzaskanie jednak nie ustało, więc postanowiłem zmienić zasilanie na mniejsze - z 5V na 3.3V - a problem zniknął. Będę musiał to dokładnie zbadać, być może da się to załatwić jakoś mało inwazyjnie.
 
@@ -151,7 +183,9 @@ Wszystko fajnie, ale docelowo głośniczek ma wydawać szereg dźwięków, a nie
 
 Częstotliwość zegara można regulować poprzez R1, R2 i C. Najsensowniej będzie ustalić jedno R1 i C, a zmieniać R2. W takim razie wyjmuję rezystor 10k pełniący rolę R2, a na jego miejsce wstawiam potencjometr precyzyjny 100k.
 
-![](../../photos/week1/week1_generator2.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_generator2.jpg" width="60%" alt="Generator dźwięku - wersja 2">
+</div>
 
 Po podłączeniu zasilania i ruszania potencjometrem dźwięk faktycznie się zmienia. Podjąłem nawet próbę wystrojenia dźwięku przy pomocy aplikacji na telefonie, jednak przy takim potencjometrze trzeba mieć naprawdę stabilną rękę - mały ruch i dźwięk jest nieczysty. Myślę, że docelowo lepszym rozwiązaniem będzie wstawienie tam zamiast jednego dużego potencjometru zwykły rezystor wraz z mniejszym potencjometrem. Do tego jednak będzie potrzebne wyznaczenie R2 dla każdego dźwięku, a następnie dobranie do nich rezystorów - odkładam to na dalszy plan.
 
@@ -159,11 +193,15 @@ Docelowo dany dźwięk ma grać tylko wtedy, kiedy z dekodera wyjdzie wartość 
 
 Postanowiłem zrobić mały eksperyment - podpinam bazę do jednego z wyjść pamięci EEPROM, na przykład najstarszy bit. Dzięki temu mogę zasymulować co się stanie, jak dany układ rezystorów zostanie załączony przez dekoder. Uruchamiam więc cały układ z licznikami (uprzednio podłączając zegar w trybie monostabilnym aby "przeklikiwać" przez kolejne adresy) i obserwuję (a raczej wysłuchuję) efekty.
 
-![](../../photos/week1/week1_generator3.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_generator3.jpg" width="60%" alt="Generator dźwięku - eksperyment">
+</div>
 
 Wszystko działa jak powinno! Gdy dioda led świeci na najstarszym bicie, głośnik wydaje dźwięk. Ponieważ mam jeszcze chwilę, dołożę drugi potencjometr i podłączę go analogicznie jak poprzedni, jednak podłączę go do drugiego w kolejności najstarszego bitu. Przy okazji dostroję oba dźwięki tak, aby na jednym potencjometrze było C, a na drugim D.
 
-![](../../photos/week1/week1_generator4.jpg)
+<div align="center">
+  <img src="../../photos/week1/week1_generator4.jpg" width="60%" alt="Generator dźwięku - wersja finalna">
+</div>
 
 Również działa jak powinno! Zauważyłem jednak jedną rzecz - gdy dwie diody (które odpowiadają podaniu sygnału na bazy tranzystorów) świecą się jednocześnie, dźwięk wydobywany z głośnika to nie jest jednocześnie połączony dźwięk C i D (interwał), lecz zupełnie inny pojedynczy dźwięk. Jest to logiczne, gdyż po załączeniu dwóch zestawów rezystorów, całkowity opór jest inny - a więc i dźwięk jest inny. Gdybym chciał tworzyć interwały bądź akordy, musiałbym najpewniej złożyć więcej generatorów. Oczywiście nie brakuje mi układów NE555, jednak skomplikuje to dodatkowo układ, a zarazem zapis nut w pamięci EEPROM jak i odczyt tych wartości. Na ten moment jeden dźwięk jednocześnie w zupełności wystarczy.
 
