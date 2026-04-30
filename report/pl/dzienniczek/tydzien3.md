@@ -2,7 +2,7 @@
 
 Właściwie od razu po powrocie z zajęć siadam do tych tranzystorów bo aż jestem ciekaw czy się uda:
 
-<u>„dokończenie układu sterownika zegara na tranzystorach a następnie złożenie całego układu"</u>
+**Dokończenie układu sterownika zegara na tranzystorach a następnie złożenie całego układu**
 
 Skończyłem układ, nie bawiłem się jeszcze w ładne docinanie przewodów i nóżek, także na razie jest to jedna wielka pajęczyna:
 
@@ -22,7 +22,7 @@ Było trochę debugowania (głównie przez stykające się rezystory + udało mi
 
 Od razu lepiej… Znowu trochę zabawy z debugowaniem ale układ działa tak jak wcześniej, także ten podpunkt z TODO mam z głowy!
 
-<u>„rozwiązanie hazardu w Multisimie, a potem dokupienie odpowiednich układów bramek do dekodera (AND) i jego złożenie"</u>
+**Rozwiązanie hazardu w Multisimie, a potem dokupienie odpowiednich układów bramek do dekodera (AND) i jego złożenie**
 
 Na poprzednich zajęciach udało się znaleźć dłuższą chwilkę na konsultację o hazardzie. Po wyjęciu układu z podukładów, uporządkowaniu i rzuceniu okiem udało się zlokalizować prawdopodobny problem - sygnał oktawy z EEPROM dociera szybciej na drugą część dekodera. Po przemyśleniu ma to sens - N0-N4 muszą jeszcze przejść przez dekoder nut, a dopiero potem na dekoder oktawy. Należy więc lekko opóźnić sygnał oktawy wychodzący z EEPROM np. przy użyciu bufora. Po jego dodaniu hazard znika, a cały układ śmiga jak powinien! 
 

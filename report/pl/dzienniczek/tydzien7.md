@@ -2,7 +2,7 @@
 
 W tym tygodniu zostały mi właściwie rzeczy „kosmetyczne", a więc:
 
-<u>"dolutowanie gniazda jack"</u>
+**Dolutowanie gniazda jack**
 
 Ponownie wybrałem się na zakupy do sklepu elektronicznego po gniazdo jack. Niestety dostępne były tylko mono, ale no cóż, biorę co jest.
 
@@ -20,7 +20,7 @@ Pozostało tylko dolutować do gniazda przewody i wpiąć je do układu. Korzyst
 
 Działa jak potrzeba, super.
 
-<u>"poszukanie powodu niegrającego układu"</u>
+**Poszukanie powodu niegrającego układu**
 
 Nad tym zastanawiałem się bardzo długo, już naprawdę nie wiedziałem co tu może być nie tak. Aż pewnego dnia, w pewien piękny, ciepły wieczór, bez żadnego większego powodu spojrzałem na to jak podłączony jest EEPROM na płytce - brakowało połączeń do masy przy dwóch liniach adresowych których nie używam…
 
@@ -28,7 +28,7 @@ Strzeliłem się w głowę, dodałem połączenia do masy i bitą godzinę siedz
 
 No cóż, nauczka na przyszłość aby sprawdzać wszystko od razu po 10 razy…
 
-<u>"poszukanie rozwiązania przerwy w dźwięku podczas grania utworu"</u>
+**Poszukanie rozwiązania przerwy w dźwięku podczas grania utworu**
 
 Nad tym też długo myślałem, rozważałem nawet wstawienie przerzutników D do każdego sygnału aby go wydłużyć na czas trwania zapisu długości kolejnej nuty do licznika malejącego. Ale wtedy również zderzyłem się ze ścianą - nie chciałem kupować przerzutników (byłem w tym sklepie tyle razy, że sprzedawca rozpoznaje mnie po głosie przez telefon), ale również zaczynało mi brakować miejsca (gdybym chciał zbudować coś takiego na AND i NOT, a nawet na tranzystorach). Problemem był fakt, że sam ułożyłem w ten sposób sterownik sygnału - rozebranie go i ułożenie na nowo nie wchodziło w grę - za dużo zabawy + nie było pewności że się zmieszczę. Rzuciłem więc okiem na tablicę Karnaugh którą wykonałem do sterownika i zauważyłem jedną rzecz:
 
@@ -44,11 +44,11 @@ Dzięki temu korzystając z bramek AND i NOT jestem w stanie zrobić OR. W takim
 
 Po złożeniu i wciśnięciu play, do moich uszu dociera piękny, rytmiczny dźwięk utworu bez przerw. Dopiero teraz słyszę to, co chciałem słyszeć od samego początku. Odetchnąłem również z ulgą, że problem udało się zgrabnie obejść bez komplikacji.
 
-<u>"dogranie paru innych utworów do pamięci EEPROM"</u>
+**Dogranie paru innych utworów do pamięci EEPROM**
 
 Niestety brakło mi już czasu i zdążyłem dodać tylko dwa mniej imponujące utwory.
 
-<u>Dodatki</u>
+**Dodatki**
 
 Do układu zasilania dodałem jeszcze przełącznik przesuwny i diodę sygnalizującą zasilanie. Dzięki temu będzie można wyjmować i wkładać EEPROMy bez konieczności odłączania układu od gniazda USB (po wyłączeniu zasilania dioda szybko gaśnie, a napięcie wynosi około 1.5V i spada. Jest to spowodowane oczywiście kondensatorem który po wyłączeniu zasilania się rozładowuje).
 
